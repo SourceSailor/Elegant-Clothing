@@ -1,10 +1,15 @@
+import Header from "./components/Header";
+import Shop from "./components/Shop";
+
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1 className="font-bold text-8xl">TEST</h1>
-    </>
+    <section className="px-20 lg:px-40 xl:px-52 py-14">
+      <Header />
+
+      <Shop />
+    </section>
   );
 }
 
