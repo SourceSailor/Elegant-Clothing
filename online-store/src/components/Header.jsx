@@ -1,6 +1,6 @@
 import logo from "../../public/logo.png";
 
-const Header = () => {
+const Header = ({ totalItems, toggleShoppingCart }) => {
   return (
     <header className="flex flex-row justify-between items-center">
       <div className="flex flex-row justify-center items-center">
@@ -15,8 +15,11 @@ const Header = () => {
         </h1>
       </div>
 
-      <button className="px-7 py-4 rounded-md bg-[#edbf68] hover:bg-[#f5b744] font-sans text-lg font-medium ml-2">
-        Cart
+      <button
+        onClick={toggleShoppingCart}
+        className="px-7 py-4 rounded-md bg-[#edbf68] hover:bg-[#f5b744] font-sans text-lg font-medium ml-2"
+      >
+        Cart ({totalItems})
       </button>
     </header>
   );
