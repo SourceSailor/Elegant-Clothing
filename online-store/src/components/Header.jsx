@@ -1,6 +1,12 @@
-import logo from "../../public/logo.png";
+import { useContext } from "react";
 
-const Header = ({ totalItems, toggleShoppingCart }) => {
+import logo from "../../public/logo.png";
+import { CartContext } from "../store/shopping-cart";
+
+const Header = () => {
+  const { totalItems } = useContext(CartContext);
+  const { toggleShoppingCart } = useContext(CartContext);
+
   return (
     <header className="flex flex-row justify-between items-center">
       <div className="flex flex-row justify-center items-center">

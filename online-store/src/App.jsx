@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
-import Shop from "./components/Shop";
+import Product from "./components/Product";
 import Cart from "./components/Cart";
+import { CartContext } from "./store/shopping-cart";
 
 import "./App.css";
 
@@ -28,7 +29,7 @@ function App() {
     setTotalItems(totalItems);
   }, [shoppingCart]);
 
-  // ADd Shopping Cart Item
+  // Add Shopping Cart Item
   function onAddToShoppingCart(productData) {
     setShoppingCart((oldData) => {
       const productIdx = oldData.findIndex(
@@ -55,7 +56,7 @@ function App() {
   }
 
   // Delete From Cart
-  function onDeleteFromShoppingCar(productId) {
+  function onDeleteFromShoppingCart(productId) {
     setShoppingCart((prevCart) =>
       prevCart.filter((product) => product.id !== productId)
     );
@@ -91,27 +92,36 @@ function App() {
   console.log("Shopping Cart: ", shoppingCart);
 
   return (
-    <section className="px-20 lg:px-40 xl:px-52 py-14">
-      {openCart ? (
-        <Cart
-          shoppingCart={shoppingCart}
-          toggleShoppingCart={toggleShoppingCart}
-          calculatedPrice={totalPrice}
-          onAddQuantity={onAddQuantity}
-          onDecrementQuantity={onDecrementQuantity}
-          onDelete={onDeleteFromShoppingCar}
-        />
-      ) : (
-        <>
-          <Header
-            totalItems={totalItems}
-            toggleShoppingCart={toggleShoppingCart}
-          />
+    <CartContext.Provider
+      value={{
+        shoppingCart,
+        totalItems,
+        totalPrice,
+        addToCart: onAddToShoppingCart,
+        deleteFromCart: onDeleteFromShoppingCart,
+        toggleShoppingCart: toggleShoppingCart,
+        addQuantity: onAddQuantity,
+        decrementQuantity: onDecrementQuantity,
+      }}
+    >
+      <section className="px-20 lg:px-40 xl:px-52 py-14">
+        {openCart ? (
+          <Cart />
+        ) : (
+          <>
+            <Header />
 
-          <Shop addToCart={onAddToShoppingCart} />
-        </>
-      )}
-    </section>
+            <section className="mt-20">
+              <h2 className="text-3xl font-bold text-center md:text-left text-stone-400">
+                Elegant Clothing For Everyone
+              </h2>
+
+              <Product />
+            </section>
+          </>
+        )}
+      </section>
+    </CartContext.Provider>
   );
 }
 

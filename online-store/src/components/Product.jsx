@@ -1,6 +1,10 @@
+import { useContext } from "react";
+
+import { CartContext } from "../store/shopping-cart";
 import { DUMMY_PRODUCTS } from "../dummie-products";
 
-const Product = ({ addToCart }) => {
+const Product = () => {
+  const { addToCart } = useContext(CartContext);
   return (
     <section className="mt-6 grid lg:grid-cols-2 2xl:grid-cols-3 gap-10">
       {DUMMY_PRODUCTS.map((product) => (

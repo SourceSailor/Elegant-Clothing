@@ -1,11 +1,15 @@
-const Cart = ({
-  shoppingCart,
-  toggleShoppingCart,
-  calculatedPrice,
-  onAddQuantity,
-  onDecrementQuantity,
-  onDelete,
-}) => {
+import { useContext } from "react";
+
+import { CartContext } from "../store/shopping-cart";
+
+const Cart = () => {
+  const { totalPrice } = useContext(CartContext);
+  const { deleteFromCart } = useContext(CartContext);
+  const { shoppingCart } = useContext(CartContext);
+  const { toggleShoppingCart } = useContext(CartContext);
+  const { addQuantity } = useContext(CartContext);
+  const { decrementQuantity } = useContext(CartContext);
+
   return (
     <div>
       <h1 className="font-bold text-3xl mb-5 mt-10 text-white">
@@ -46,23 +50,21 @@ const Cart = ({
                             Quantity:
                             <button
                               className="hover:text-stone-400 text-2xl"
-                              onClick={() =>
-                                onDecrementQuantity(cartProduct.id)
-                              }
+                              onClick={() => decrementQuantity(cartProduct.id)}
                             >
                               -
                             </button>
                             {cartProduct.quantity}
                             <button
                               className="hover:text-stone-400 text-xl"
-                              onClick={() => onAddQuantity(cartProduct.id)}
+                              onClick={() => addQuantity(cartProduct.id)}
                             >
                               +
                             </button>
                           </p>
                           <button
                             className="mt-5 font-bold text-red-700 hover:text-red-500"
-                            onClick={() => onDelete(cartProduct.id)}
+                            onClick={() => deleteFromCart(cartProduct.id)}
                           >
                             Delete
                           </button>
@@ -77,7 +79,7 @@ const Cart = ({
 
               <div className="border border-gray-200 " />
               <p className="text-2xl mt-5 text-white">
-                Subtotal: ${calculatedPrice}
+                Subtotal: ${totalPrice}
               </p>
             </div>
           </div>
