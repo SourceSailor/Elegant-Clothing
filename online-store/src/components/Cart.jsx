@@ -32,7 +32,7 @@ const Cart = () => {
                       <div className="border border-gray-200 " />
 
                       {/* Product */}
-                      <div className="flex flex-row items-center gap-5 my-10">
+                      <div className="flex flex-col md:flex-row items-center gap-5 my-10">
                         {/* Product Image */}
                         <img
                           className="w-[200px]"
@@ -41,7 +41,7 @@ const Cart = () => {
                         />
 
                         {/* Product Info and Quantity */}
-                        <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-start lg:w-1/3">
                           <h4>{cartProduct.product}</h4>
                           <p className="flex flex-row font-bold gap-3 mt-5">
                             Price: ${cartProduct.price}
